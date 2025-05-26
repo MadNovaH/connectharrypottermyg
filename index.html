@@ -32,7 +32,7 @@
     h1 {
       font-size: 4em;
       color: #e6c87b;
-      margin-bottom: 0.2em;
+      margin-bottom: 0.5em;
       text-shadow: 2px 2px 5px #000;
     }
 
@@ -76,6 +76,11 @@
     <div class="info" id="status">📡 Statut : ...</div>
     <div class="info" id="uptime">⏱️ Uptime : ...</div>
 
+    <div class="info" id="map">🗺️ Carte : ...</div>
+    <div class="info" id="gamemode">🎮 Mode de jeu : ...</div>
+    <div class="info" id="password">🛡️ Protégé par mot de passe : ...</div>
+    <div class="info" id="location">📍 Serveur hébergé en : 🇫🇷 France</div>
+
     <a class="button" href="steam://connect/31.56.58.107:27501">
       ✨ Appuyez pour vous connecter
     </a>
@@ -100,14 +105,22 @@
         const uptimeStr = days > 0
           ? `${days}j ${hours % 24}h ${minutes % 60}m`
           : `${hours}h ${minutes % 60}m`;
-
         document.getElementById("uptime").innerText = `⏱️ Uptime : ${uptimeStr}`;
+
+        document.getElementById("map").innerText = `🗺️ Carte : ${server.details.map || "Inconnue"}`;
+        document.getElementById("gamemode").innerText = `🎮 Mode de jeu : ${server.details.gameMode || "Non défini"}`;
+        document.getElementById("password").innerText = `🛡️ Protégé par mot de passe : ${server.details.password ? "Oui" : "Non"}`;
+        document.getElementById("location").innerText = "📍 Serveur hébergé en : 🇫🇷 France";
       })
       .catch(() => {
         document.getElementById("server-name").innerText = "Impossible de charger les données.";
         document.getElementById("players").innerText = "";
-        document.getElementById("status").innerText = "Statut : 🔴 Hors ligne";
+        document.getElementById("status").innerText = "📡 Statut : 🔴 Hors ligne";
         document.getElementById("uptime").innerText = "";
+        document.getElementById("map").innerText = "";
+        document.getElementById("gamemode").innerText = "";
+        document.getElementById("password").innerText = "";
+        document.getElementById("location").innerText = "";
       });
   </script>
 </body>
